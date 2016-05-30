@@ -107,6 +107,10 @@
             <i class="material-icons">more_vert</i>
           </button>
           <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+            {% if session.username %}
+              <a href="{{ url_for('profile', username=session.username) }}" class="mdl-menu__item">Profile  </a>              
+              <a href="{{ url_for('logout') }}" class="mdl-menu__item">Logout  </a>
+            {% endif %}
             <li class="mdl-menu__item">About</li>
             <li class="mdl-menu__item">Contact</li>
             <li class="mdl-menu__item">Legal information</li>

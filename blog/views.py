@@ -174,7 +174,13 @@ facebook = oauth.remote_app('facebook',
 @app.route('/registerWithFacebook')
 def registerWithFacebook():
     return facebook.authorize(callback=url_for('facebook_authorized',
-        next=request.args.get('next') or request.referrer or None,
+        next=request.args.get('next') or request.referrer or None,action='register',
+        _external=True))
+
+@app.route('/loginWithFacebook')
+def loginWithFacebook():
+    return facebook.authorize(callback=url_for('facebook_authorized',
+        next=request.args.get('next') or request.referrer or None,action='login',
         _external=True))
 
 @app.route('/facebook/authorized')
@@ -191,24 +197,34 @@ def facebook_authorized(resp):
 
     me = facebook.get('/me?fields=id,name,first_name,last_name,age_range,link,gender,locale,timezone,updated_time,verified,friends,email,picture')
 
-#{"id":"10206536501835765","name":"Rafael Sandroni","first_name":"Rafael","last_name":"Sandroni","age_range":{"min":21},
-#"link":"https:\\/\\/www.facebook.com\\/app_scoped_user_id\\/10206536501835765\\/","gender":"male","locale":"en_US","timezone":-3,
-#"updated_time":"2016-05-22T17:00:34+0000","verified":true,"email":"rafaelsandroni\\u0040live.com","picture":{"data":{"is_silhouette":false,"url":"https:\\/\\/fbcdn-profile-a.akamaihd.net\\/hprofile-ak-xpa1\\/v\\/t1.0-1\\/p50x50\\/13241223_10206457839709261_8524898547424479803_n.jpg?oh=cd29476f7ba570302e38fc26b7cab915&oe=57C61D23&__gda__=1472290206_9aa4722312108463eab51b37fd6f24c6"}}}
     about = me.data
     username = me.data['email']
-    if User(username).registerWithFacebook(about):
-        session['username'] = username
-        session['name'] = about['name']
-        if not about['picture']['data']['url'] :
-            session['user_picture'] = "https://getmdl.io/templates/dashboard/images/user.jpg"
+    password = me.data['id']
+
+    if request.args.get('action') == 'register':
+        if User(username).registerWithFacebook(about):
+            session['username'] = username
+            session['name'] = about['name']
+            if not about['picture']['data']['url'] :
+                session['user_picture'] = "https://getmdl.io/templates/dashboard/images/user.jpg"
+            else:
+                session['user_picture'] = about['picture']['data']['url']
+
+
+            flash('Logged in.')
+            return redirect(url_for('index'))
         else:
-            session['user_picture'] = about['picture']['data']['url']
+            flash("Invalid Register")
 
-
-        flash('Logged in.')
-        return redirect(url_for('index'))
     else:
-        return render_template('register.html')
+            if User(username).verify_password(password):
+                session['username'] = username
+                flash('Logged in.')
+                return redirect(url_for('index'))
+            else:
+                flash('Invalid login.')
+
+    return redirect( request.args.get('next') )
 
     #return "Logged in as %s<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>" % tuple(me.data)
     #return 'Logged in as id=%s email%s name=%s me=%s redirect=%s' % \

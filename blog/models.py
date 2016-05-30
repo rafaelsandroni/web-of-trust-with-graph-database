@@ -31,7 +31,7 @@ class User:
 
     def registerWithFacebook(self, data):
         if not self.find():
-            password = '12345678'
+            password = data['id']
             picture_url = data['picture']['data']['url']
             user = Node("User", id=data['id'],
             username=data['email'],password=bcrypt.encrypt(password),name=data['name'],
