@@ -6,7 +6,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    posts = get_todays_recent_posts()
+    posts = 'teste'
+    #get_todays_recent_posts()
     return render_template('index.html', posts=posts)
 
 @app.route('/register', methods=['GET','POST'])
