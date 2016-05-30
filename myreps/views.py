@@ -1,5 +1,5 @@
 from .models import User, get_todays_recent_posts
-from flask import Flask, request, session, redirect, url_for, render_template, flash
+from flask import Flask, request, session, redirect, url_for, render_template, flash, Response, jsonify, json
 from json import dumps
 
 app = Flask(__name__)
@@ -124,7 +124,7 @@ def profile(username):
 
 
     return render_template(
-        'profile.html',
+        'new_profile.html',
         username=username,
         posts=posts,
         similar=similar,
@@ -147,8 +147,21 @@ def get_search():
             'discover.html',
             results=results,
         )
+@app.route('/discover')
+def discover():
+    return render_template('discover.html', tags='#nome')
+
+@app.route('/new_profile')
+def new_profile():
+    return render_template('new_profile.html', app='profile')
 
 
+
+
+@app.route("/get_listing")
+def get_listing():
+
+    return jsonify({'name':'Rafael Sandroni','user':'rafaelsandroni','picture':'https://getmdl.io/templates/dashboard/images/user.jpg','reviews':'22','score':'TOP'})
 
 
 #OAuth

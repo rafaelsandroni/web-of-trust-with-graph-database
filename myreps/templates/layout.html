@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MyReps - the Reputation Standard</title>
+    <meta http-equiv=X-UA-Compatible content="IE=edge">
+    <meta name=description content="This web application will work in offline, has a splash screen add to home screen etc,.">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#212225">
+    <meta name="msapplication-TileColor" content="#212225">
+    <meta name="msapplication-TileImage" content="/static/images/icons/G-Logo-144.png">
+    <link rel=icon sizes="192x192" href="/static/images/icons/G-Logo-192.png">
+    <link rel="apple-touch-icon" href="/static/images/icons/G-Logo-192.png">
+    <link rel="manifest" href="/static/manifest.json">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,700">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.css">
+    <link rel="stylesheet" href="https://getmdl.io/templates/dashboard/styles.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+  </head>
+  <body>
+    <dialog class="mdl-dialog">
+      <h4 class="mdl-dialog__title">Botão de ação</h4>
+      <div class="mdl-dialog__content">
+        <p>
+          Cada perfil possui o seu. Existem diversas opções para incluir aqui, como p.e. solicitar um contato, marcar uma consulta ou comprar um produto/serviço.
+        </p>
+      </div>
+      <div class="mdl-dialog__actions">
+        <!--<button type="button" class="mdl-button">Entendi</button>-->
+        <button type="button" class="mdl-button close">Entendi</button>
+      </div>
+    </dialog>
+
+
+  <header class="header">
+    <svg class="menu-icon" width="24px" height="24px" viewBox="0 0 48 48">
+      <path d="M6 36h36v-4H6v4zm0-10h36v-4H6v4zm0-14v4h36v-4H6z"></path>
+    </svg>
+
+    <span>MyReps</span>
+
+    <span align="right">
+      <small>Discover</small>
+      &nbsp;
+      <small><span class="material-icons mdl-badge mdl-badge--overlap">account_box</span>My Profile</small>
+    </span>
+
+  </header>
+
+
+
+  <section id="menu">
+    <ul>
+      <li>
+        <a href="/" class="homepage">
+          <img class="logo" src="/images/icons/G-Logo-128.png" alt="Logo">
+          <span>Links</span>
+        </a>
+      </li>
+      <li>
+        <img src="{{ session.user_picture }}" class="demo-avatar">
+
+        {% if session.username %}
+        Logged in as {{ session.name }}
+        {% endif %}
+      </li>
+      <li><a target="_blank" href="https://github.com/gokulkrishh">Author</a></li>
+
+      <li><a href="{{ url_for('index') }}" >Home  </a></li>
+      &nbsp;&nbsp;
+      {% if not session.username %}
+        <li><a href="{{ url_for('register') }}" >Register  </a></li>
+        &nbsp;&nbsp;
+        <li><a href="{{ url_for('login') }}" >Login  </a></li>
+        &nbsp;&nbsp;
+      {% else %}
+        <li><a href="{{ url_for('profile', username=session.username) }}" >Profile  </a></li>
+        &nbsp;&nbsp;
+        <li><a href="{{ url_for('logout') }}" >Logout  </a></li>
+      {% endif %}
+
+      <li class="info">
+        <span>SW Registration:
+          <b>
+            <span id="sw-register-state">✕</span>
+          </b>
+        </span>
+      </li>
+      <li class="info info-offline">
+        <span>Offline:
+          <b>
+            <span id="sw-offline-state">✕</span>
+          </b>
+        </span>
+      </li>
+      <li>
+        <iframe src="https://ghbtns.com/github-btn.html?user=gokulkrishh&repo=simple-progressive-web-app&type=star&count=true&size=large" frameborder="0" scrolling="0" width="130px" height="30px"></iframe>
+        <iframe src="https://ghbtns.com/github-btn.html?user=gokulkrishh&repo=simple-progressive-web-app&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="130px" height="30px"></iframe>
+      </li>
+
+    </ul>
+  </section>
+
+  <div class="header-section" style="min-height:15em;display:block;background-image: url('http://onlybackground.com/wp-content/uploads/2014/01/beach-wallpaper-tumblr.jpg');background-position: 50% 90%;
+  background-repeat: no-repeat;min-height: 200px;">
+
+    <div class="header-container">
+
+
+      <p>People that love #entrepreneur stay here. <small><span class="material-icons mdl-badge mdl-badge--overlap" data-badge="1">account_box</span>My Profile</small></p>
+      <!--<p class="custom-button">Enable Push Notifications:
+        <input id="turn-on-notification" type="checkbox" hidden="hidden" class="custom-input" data-checked="">
+        <label for="turn-on-notification" class="custom-checkbox"></label>
+      </p>-->
+
+    </div>
+  </div>
+
+
+  <section id="menu-overlay"></section>
+
+
+
+
+  <button class="btn-notification hide" id="send-push">Send Push Notification</button>
+
+  <main class="">
+    <div class="mdl-grid demo-content">
+             {% block body %}{% endblock %}
+
+              <p class="loading">Loading...</p>
+      </div>
+  </main>
+
+  <!-- JS Files  -->
+  <script src="/static/js/jquery-2.1.4.js"></script>
+  <script src="/static/js/main.js"></script>
+  {% if app == 'profile' %}
+  <script src="/static/js/app_profile.js"></script>
+  {% else %}
+  <script src="/static/js/app.js"></script>
+  {% endif %}
+  <!--<a href="https://github.com/google/material-design-lite/blob/master/templates/dashboard/" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">View Source</a>-->
+<script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+<script>
+   var dialog = document.querySelector('dialog');
+   var showDialogButton = document.querySelector('#show-dialog');
+   if (! dialog.showModal) {
+     dialogPolyfill.registerDialog(dialog);
+   }
+   showDialogButton.addEventListener('click', function() {
+     dialog.showModal();
+   });
+   dialog.querySelector('.close').addEventListener('click', function() {
+     dialog.close();
+   });
+
+ </script>
+  </body>
+</html>

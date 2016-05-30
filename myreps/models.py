@@ -138,6 +138,8 @@ class User:
         results = graph.cypher.execute(query, name=name)
         return results
 
+
+
 def get_todays_recent_posts():
     query = """
     MATCH (user:User)-[:PUBLISHED]->(post:Post)<-[:TAGGED]-(tag:Tag)

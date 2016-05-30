@@ -1,0 +1,60 @@
+<ul class="demo-list-three mdl-list">
+  {% for row in reviews %}
+    <li class="mdl-list__item mdl-list__item--three-line">
+        <span class="mdl-list__item-primary-content">
+        <i class="material-icons mdl-list__item-avatar">business</i>
+        <span>{{ row['people.username'] }}</span>
+        <span class="mdl-list__item-text-body">
+        {{ row['r.text'] }}
+        </span>
+        </span>
+        <span class="mdl-list__item-secondary-content">
+          {{ row['r.rating'] }}
+        <!--<a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i></a>-->
+        </span>
+    </li>
+  {% else %}
+
+      <li class="mdl-list__item mdl-list__item--three-line">
+          <span class="mdl-list__item-primary-content">
+          <i class="material-icons mdl-list__item-avatar">business</i>
+
+          <span>O cara é bom mesmo!</span>
+          <span class="mdl-list__item-text-body">
+          Fizemos negócio com Rafael. Recomendo!!
+          </span>
+          </span>
+          <span class="mdl-list__item-secondary-content">
+            Meu nome
+          <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star star star star star</i></a>
+          </span>
+      </li>
+      <li class="mdl-list__item mdl-list__item--three-line">
+      <span class="mdl-list__item-primary-content">
+      <i class="material-icons  mdl-list__item-avatar">person</i>
+      <span>Rapaz, recomendo esse cara!</span>
+      <span class="mdl-list__item-text-body">
+      Comprei bateria pelo mercado livre.
+      </span>
+      </span>
+      <span class="mdl-list__item-secondary-content">
+        Paula Lima
+      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i></a>
+      </span>
+      </li>
+      <li class="mdl-list__item mdl-list__item--three-line">
+      <span class="mdl-list__item-primary-content">
+      <i class="material-icons  mdl-list__item-avatar">person</i>
+      <span>Gente fina!</span>
+      <span class="mdl-list__item-text-body">
+      Não tenho o que falar!
+      </span>
+      </span>
+      <span class="mdl-list__item-secondary-content">
+        Maria do Carmo
+      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i></a>
+      </span>
+      </li>
+
+  {% endfor %}
+  </ul>

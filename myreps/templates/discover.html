@@ -1,12 +1,8 @@
 {% extends "layout.html" %}
 {% block body %}
 
-
-<div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-
-  <div class="demo-card-wide mdl-card mdl-shadow - -2 d p " >
     <div class="mdl-card__title">
-      <h2 class="mdl-card__title-text">Discover</h2>
+      <h2 class="mdl-card__title-text">Discover {{ tags }}</h2>
     </div>
 
     {% if results %}
@@ -34,7 +30,6 @@
       </tbody>
       </table>
     {% endif %}
-  </div>
-</div>
+
 
 {% endblock %}

@@ -1,0 +1,27 @@
+  <ul class="demo-list-three mdl-list">
+  {% for row in posts %}
+    <li>
+    	<b>{{ row.post.title }}</b>
+        {% if request.path == "/" %}
+    	by <a href="{{ url_for('profile', username=row.username) }}">{{ row.username }}</a>
+        {% endif %}
+    	on {{ row.post.date }}
+    	<a href="{{ url_for('like_post', post_id=row.post.id) }}">like</a><br>
+    	<i>{{ ", ".join(row.tags) }}</i><br>
+    	{{ row.post.text }}
+  {% else %}
+     <li class="mdl-list__item mdl-list__item--three-line">
+          <span class="mdl-list__item-primary-content">
+          <i class="material-icons mdl-list__item-avatar">business</i>
+          <span>Não me pagou!</span>
+          <span class="mdl-list__item-text-body">
+          Não recomendo, caloteira!
+          </span>
+          </span>
+          <span class="mdl-list__item-secondary-content">
+            Megan Fox
+          <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+          </span>
+      </li>
+  {% endfor %}
+  </ul>
