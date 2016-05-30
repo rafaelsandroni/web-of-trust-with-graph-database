@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+
+
+ <div class="demo-cards mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet mdl-cell--4-col-desktop mdl-grid mdl-grid--no-spacing">
+
+    <div class="demo-options mdl-card mdl-color--grey-500 mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+      <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
+
+        <h2>Register</h2>
+        <a href="/registerWithFacebook">Register with Facebook</a>
+      	<form action="{{ url_for('register') }}" method="post">
+              <dl>
+                  <dt>Username:</dt>
+                  <dd><input type="text" name="username"></dd>
+                  <dt>Password:</dt>
+                  <dd><input type="password" name="password"></dd>
+              </dl>
+              <input type="submit" value="Register">
+      	</form>
+
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50">Procurar</a>
+        <div class="mdl-layout-spacer"></div>
+        <i class="material-icons">location_on</i>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--8-col mdl-grid">
+
+    <div class="demo-card-wide mdl-card mdl-shadow - -2 d p " >
+
+      <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">{{ username }}</h2>
+      </div>
+
+
+
+
+
+
+<div class="mdl-card__actions mdl-card--border">
+a
+</div>
+
+</div>
+
+  </div>
+
+
+
+
+{% endblock %}

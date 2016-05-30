@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+
+  <div class="demo-card-wide mdl-card mdl-shadow - -2 d p " >
+    <div class="mdl-card__title">
+      <h2 class="mdl-card__title-text">Discover</h2>
+    </div>
+
+    {% if results %}
+    <table class="table table-striped table-hover">
+        <thead>
+          <tr><td>Nome</td><td>Email</td></tr>
+        </thead>
+        <tbody>
+    {% endif %}
+    {% for row in results %}
+    <tr>
+      <td>
+        <a href="/profile/{{ row['user.username'] }}">
+          {{ row['user.username'] }}
+        </a>
+      </td>
+      <td>
+        {{ row['user.email'] }}
+      </td>
+    </tr>
+    {% else %}
+      <br>There aren't any posts yet!
+    {% endfor %}
+    {% if results %}
+      </tbody>
+      </table>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
