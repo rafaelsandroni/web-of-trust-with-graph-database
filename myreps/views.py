@@ -1,5 +1,7 @@
 from .models import User, get_todays_recent_posts
 from flask import Flask, request, session, redirect, url_for, render_template, flash, Response, jsonify, json
+from flask_oauth import OAuth
+
 from json import dumps
 
 app = Flask(__name__)
@@ -166,7 +168,6 @@ def get_listing():
 
 #OAuth
 
-from flask_oauth import OAuth
 
 oauth = OAuth()
 
