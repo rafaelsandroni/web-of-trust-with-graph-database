@@ -1,4 +1,4 @@
-# Dappr - Reputation and trust network
+# Reputation and trust network
 
 Dappr is a app reputation that tells you which people you can trust, based on other users' experiences and behavior on social networks.
 
